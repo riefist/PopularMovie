@@ -9,13 +9,4 @@ class MovieRepository(val remoteMovieDataSource: RemoteMovieDataSource) {
     fun getPopularMovies() : Observable<PopularMovieModel.Response>
             = remoteMovieDataSource.getPopularMovies()
 
-    companion object {
-        var INSTANCE : MovieRepository? = null
-
-        fun getInstance(remoteMovieDataSource: RemoteMovieDataSource) : MovieRepository =
-                INSTANCE ?: synchronized(this) {
-                    INSTANCE ?: MovieRepository(remoteMovieDataSource).also { INSTANCE = it }
-                }
-    }
-
 }
