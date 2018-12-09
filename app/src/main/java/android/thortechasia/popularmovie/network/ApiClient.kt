@@ -7,9 +7,9 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-object ApiClient {
+public class ApiClient {
 
-    fun create() : ApiService {
+    public fun create() : ApiService {
         val retrofit = Retrofit.Builder()
             .client(provideOkHttpClient())
             .baseUrl(BuildConfig.BASE_URL)

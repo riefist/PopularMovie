@@ -1,6 +1,7 @@
-package android.thortechasia.popularmovie
+package android.thortechasia.popularmovie.ui.main
 
 import android.support.v7.widget.RecyclerView
+import android.thortechasia.popularmovie.R
 import android.thortechasia.popularmovie.Utils.Constants
 import android.thortechasia.popularmovie.Utils.loadImage
 import android.thortechasia.popularmovie.data.PopularMovieModel
