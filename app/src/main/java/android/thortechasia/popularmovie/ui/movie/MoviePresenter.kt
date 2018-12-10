@@ -1,9 +1,11 @@
 package android.thortechasia.popularmovie.ui.movie
 
-import android.thortechasia.popularmovie.data.repository.MovieRepository
+import android.thortechasia.popularmovie.repository.MovieRepository
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.subscribeBy
+import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 
 class MoviePresenter(val movieRepository: MovieRepository,
@@ -22,11 +24,15 @@ class MoviePresenter(val movieRepository: MovieRepository,
 
     override fun getPopularMovies() {
         mView?.showLoading()
-        movieRepository.getPopularMovies().subscribeBy(
-            onNext = {
+        Timber.d("asdasd")
+        movieRepository.getPopularMovies()
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.io())
+            .subscribeBy(
+            onSuccess = {
+                Timber.d(it.size.toString())
                 mView?.hideLoading()
-                mView?.showPopularMovies(it.movies)
-                Timber.d("success get movie")
+                mView?.showPopularMovies(it)
             },
             onError = {
                 mView?.hideLoading()

@@ -1,4 +1,4 @@
-package android.thortechasia.popularmovie.data
+package android.thortechasia.popularmovie.data.remote
 
 import com.google.gson.annotations.SerializedName
 
@@ -9,10 +9,10 @@ object PopularMovieModel {
         val total_results: Int,
         val total_pages: Int,
         @SerializedName("results")
-        val movies: List<Movies>
+        val movies: List<Movie>
     )
 
-    data class Movies(
+    data class Movie(
         val vote_count: Int,
         val id: Int,
         val video: Boolean,
