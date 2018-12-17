@@ -8,7 +8,8 @@ import org.koin.dsl.module.module
 val roommModule = module {
 
     single { Room.databaseBuilder(androidApplication(),AppDatabase::class.java,
-        "movie_db").build() }
+        "movie_db")
+        .build() }
 
     single { get<AppDatabase>().popularMovieDao() }
 
