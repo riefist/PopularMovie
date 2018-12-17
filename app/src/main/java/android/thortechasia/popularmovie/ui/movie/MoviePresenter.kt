@@ -1,6 +1,7 @@
 package android.thortechasia.popularmovie.ui.movie
 
 import android.thortechasia.popularmovie.data.repository.MovieRepository
+import android.thortechasia.popularmovie.utils.scheduler.AppSchedulerProvider
 import android.thortechasia.popularmovie.utils.scheduler.SchedulerProvider
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
