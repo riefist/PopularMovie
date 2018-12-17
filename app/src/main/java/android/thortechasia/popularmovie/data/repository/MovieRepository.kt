@@ -17,7 +17,6 @@ class MovieRepository(
             .map { PopularMovie.from(it) }
     }
 
-
     override fun getPopularMovies(): Single<List<PopularMovie>> {
         return lokalMovieDataSource.getPopularMovies()
             .map { list ->
@@ -28,8 +27,7 @@ class MovieRepository(
                     Single.just(it)
             }
             .doAfterSuccess {
-                getPopularFromRemote()
-                    .subscribeOn(Schedulers.io())
+                getPopularFromRemote().subscribeOn(Schedulers.io())
                     .subscribe({
                         Timber.d("refresh data")
                     },{
@@ -40,13 +38,15 @@ class MovieRepository(
 
     private fun getPopularFromRemote(): Single<List<PopularMovie>> {
         return remoteMovieDataSource.getPopularMovies()
-            .doOnSuccess {
+            .doOnNext {
                 lokalMovieDataSource.savePopularMovies(it.movies.map { movie ->
-                    PopularMovieEntity.from(movie)
+                                        PopularMovieEntity.from(movie)
                 })
             }
             .map { list ->
                 list.movies.map { PopularMovie.from(it) }
             }
+            .singleOrError()
+
     }
 }
